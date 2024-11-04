@@ -1,9 +1,32 @@
 package design
 
-import "math"
+import (
+	"errors"
+	"math"
+)
+
+type ShapeFactory interface {
+	CreateShape(name string) Shape
+}
+
+type ShapeFactoryStruct struct {
+	GuestShape *Shape
+}
+
+func (sf *ShapeFactoryStruct) CreateShape(name string) (Shape, error) {
+	switch name {
+	case "Circle":
+		return new(Circle), nil
+	case "Rectangle":
+		return new(Rectangle), nil
+	default:
+		return nil, errors.New("不符合需求的图形")
+	}
+}
 
 type Shape interface {
 	Draw() float64
+	Init(args ...float64)
 }
 
 type Circle struct {
@@ -14,19 +37,20 @@ func (c Circle) Draw() float64 {
 	return math.Pi * c.radius * c.radius
 }
 
-func (c *Circle) Init(r float64) {
-	c.radius = r
+func (c *Circle) Init(args ...float64) {
+	c.radius = args[0]
 }
 
 type Rectangle struct {
-	length float64
 	height float64
+	length float64
 }
 
-func (r *Rectangle) Init(l float64, h float64) {
-	r.length = l
-	r.height = h
+func (rc Rectangle) Draw() float64 {
+	return rc.height * rc.length
 }
-func (r Rectangle) Draw() float64 {
-	return r.length * r.height
+
+func (rc *Rectangle) Init(args ...float64) {
+	rc.height = args[0]
+	rc.length = args[1]
 }
