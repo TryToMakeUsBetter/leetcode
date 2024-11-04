@@ -22,9 +22,9 @@ func TestDraw(t *testing.T) {
 		guestRec.Init(5.0, 5.0)
 		rec.Init(10.0, 10.0)
 		cir.Init(10.0)
-		convey.ShouldEqual(rec.Draw(), rec.height*rec.length)
-		convey.ShouldEqual(cir.Draw(), math.Pi*cir.radius*cir.radius)
-		convey.ShouldEqual(sh1.Draw(), guestRec.height*guestRec.length)
-		convey.ShouldEqual(sh2.Draw(), math.Pi*(*guestCir).radius*(*guestCir).radius)
+		convey.So(rec.Draw(), convey.ShouldEqual, 100.00)
+		convey.So(cir.Draw(), convey.ShouldEqual, math.Pi*cir.radius*cir.radius)
+		convey.So(sh1.Draw(), convey.ShouldEqual, guestRec.height*guestRec.length)
+		convey.So(sh2.Draw(), convey.ShouldEqual, math.Pi*(*guestCir).radius*(*guestCir).radius)
 	})
 }
