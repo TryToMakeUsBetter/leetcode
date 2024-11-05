@@ -1,6 +1,8 @@
-package grpc
+package client
 
-import "context"
+import (
+	"context"
+)
 
 type client struct {
 }
