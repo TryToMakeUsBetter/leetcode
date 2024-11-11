@@ -17,5 +17,4 @@ func TestMySlice(t *testing.T) {
 		EnlargeSliceAgain(&res1)
 		convey.So(res2, convey.ShouldResemble, res1[0:2])
 	})
-
 }
