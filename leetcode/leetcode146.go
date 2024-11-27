@@ -1,18 +1,18 @@
 package leetcode
 
 type LRUCache struct {
-	head, tail *listNode
+	head, tail *lc146node
 	cap        int
-	mem        map[int]*listNode
+	mem        map[int]*lc146node
 }
 
-type listNode struct {
+type lc146node struct {
 	key, value int
-	pre, nxt   *listNode
+	pre, nxt   *lc146node
 }
 
-func newNode(key, value int) *listNode {
-	return &listNode{
+func newNode(key, value int) *lc146node {
+	return &lc146node{
 		key:   key,
 		value: value,
 		pre:   nil,
@@ -27,7 +27,7 @@ func LRUConstructor(capacity int) LRUCache {
 	tmp.tail = newNode(0, 0)
 	tmp.head.nxt = tmp.tail
 	tmp.tail.pre = tmp.head
-	tmp.mem = make(map[int]*listNode, capacity)
+	tmp.mem = make(map[int]*lc146node, capacity)
 	return *tmp
 }
 
@@ -54,7 +54,7 @@ func (this *LRUCache) Put(key int, value int) {
 	}
 }
 
-func (this *LRUCache) addHead(node *listNode) {
+func (this *LRUCache) addHead(node *lc146node) {
 	first := this.head.nxt
 
 	this.mem[node.key] = node
@@ -74,7 +74,7 @@ func (this *LRUCache) removeTail() {
 	}
 }
 
-func (this *LRUCache) removeNode(node *listNode) {
+func (this *LRUCache) removeNode(node *lc146node) {
 	delete(this.mem, node.key)
 	preNode := node.pre
 	nxtNode := node.nxt
@@ -83,7 +83,7 @@ func (this *LRUCache) removeNode(node *listNode) {
 	nxtNode.pre = preNode
 }
 
-func (this *LRUCache) reAddHead(node *listNode) {
+func (this *LRUCache) reAddHead(node *lc146node) {
 	this.removeNode(node)
 	this.addHead(node)
 }
