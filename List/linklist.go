@@ -46,3 +46,20 @@ func (list List) Display() {
 		current = current.next
 	}
 }
+
+func (list *List) ReverseList() {
+	if list.Head == nil {
+		return
+	}
+	current := list.Head
+	var pre *Node
+
+	for current != nil {
+		nxt := current.next
+		current.next = pre
+		pre = current
+		current = nxt
+	}
+
+	list.Head = pre
+}

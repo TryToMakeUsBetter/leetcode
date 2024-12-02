@@ -59,4 +59,5 @@ func (l *List) ReverseList() {
 		current.Next.Next = current
 		current = current.Next
 	}
+	l.Head = current
 }
