@@ -49,23 +49,6 @@ func (list List) Display() {
 	}
 }
 
-func (list *List) ReverseList() {
-	if list.Head == nil {
-		return
-	}
-	current := list.Head
-	var pre *Node
-
-	for current != nil {
-		nxt := current.next
-		current.next = pre
-		pre = current
-		current = nxt
-	}
-
-	list.Head = pre
-}
-
 func TurnSliceIntoList(input []int) (list *List) {
 	if len(input) == 0 {
 		return
@@ -102,4 +85,21 @@ func (list *List) ReversePartList(m int, n int) {
 	}
 
 	list.Head = mark.next
+}
+
+func (list *List) ReverseList() {
+	if list.Head == nil {
+		return
+	}
+	current := list.Head
+	var pre *Node
+
+	for current != nil {
+		nxt := current.next
+		current.next = pre
+		pre = current
+		current = nxt
+	}
+
+	list.Head = pre
 }
