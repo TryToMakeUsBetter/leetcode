@@ -46,3 +46,17 @@ func (l *ListNode) TransToNums() (res []int) {
 	}
 	return res
 }
+
+type List struct {
+	Head *ListNode
+}
+
+func (l *List) ReverseList() {
+	current := l.Head
+	pre := new(ListNode)
+	for current.Next != nil {
+		pre.Next = current
+		current.Next.Next = current
+		current = current.Next
+	}
+}
