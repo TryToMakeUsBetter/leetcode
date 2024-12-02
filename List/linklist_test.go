@@ -26,7 +26,14 @@ func TestReverseList(t *testing.T) {
 	convey.Convey("ReverseList", t, func() {
 		list1 := TurnSliceIntoList([]int{1, 2, 3, 4, 5})
 		list1.Display()
+		fmt.Println()
 
+		list1.ReverseList()
+		list1.Display()
+		fmt.Println()
+
+		list1.ReverseListv2()
+		list1.Display()
 		fmt.Println()
 
 		list1.ReversePartList(2, 5)

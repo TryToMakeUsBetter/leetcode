@@ -87,6 +87,25 @@ func (list *List) ReversePartList(m int, n int) {
 	list.Head = mark.next
 }
 
+func (list *List) ReverseListv2() {
+	dummyNode := &Node{
+		0,
+		list.Head,
+	}
+
+	pre := dummyNode
+	current := pre.next
+
+	for current.next != nil {
+		nxt := current.next
+		current.next = nxt.next
+		nxt.next = pre.next
+		pre.next = nxt
+	}
+
+	list.Head = dummyNode.next
+}
+
 func (list *List) ReverseList() {
 	if list.Head == nil {
 		return
