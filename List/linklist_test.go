@@ -24,17 +24,12 @@ func TestAddList(t *testing.T) {
 
 func TestReverseList(t *testing.T) {
 	convey.Convey("ReverseList", t, func() {
-		node1 := NewNode(1)
-		node2 := NewNode(2)
-		node3 := NewNode(3)
-		list1 := NewList(node1)
-		list1.HeadAddList(node2)
-		list1.RearAddList(node3)
+		list1 := TurnSliceIntoList([]int{1, 2, 3, 4, 5})
 		list1.Display()
 
 		fmt.Println()
 
-		list1.ReverseList()
+		list1.ReversePartList(2, 5)
 		list1.Display()
 	})
 }
