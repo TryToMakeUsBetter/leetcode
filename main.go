@@ -123,20 +123,58 @@ func isPrime(input int) (res int, flag bool) {
 	return input, true
 }
 
+func GetUpper(input []rune) []rune {
+	upperSlice := make([]rune, 0, len(input))
+	for i := 0; i < len(input); i++ {
+		if input[i] >= 'A' && input[i] <= 'Z' {
+			upperSlice = append(upperSlice, input[i])
+		}
+	}
+	return upperSlice
+}
+
+func GetLower(input []rune) []rune {
+	lowerSlice := make([]rune, 0, len(input))
+	for i := 0; i < len(input); i++ {
+		if input[i] >= 'a' && input[i] <= 'z' {
+			lowerSlice = append(lowerSlice, input[i])
+		}
+	}
+	return lowerSlice
+}
+
 func main() {
-	r := gin.New()
+	str := "AAABCCCcccccdAB"
+	inputStr := []rune(str)
+	upSlice := GetUpper(inputStr)
+	lowSlice := GetLower(inputStr)
 
-	gin.SetMode("debug")
-
-	apiv1 := r.Group("/api/v1")
-	{
-		apiv1.GET("/Prime", Prime)
+	switchFlag := -1
+	upPtr := 0
+	lowPtr := 0
+	if len(upSlice) == 0 || len(lowSlice) == 0 {
+		fmt.Println(str)
 	}
+	for i := 0; i < len(inputStr); i++ {
+		if switchFlag == -1 && upPtr < len(upSlice) {
+			fmt.Print(string(upSlice[upPtr]))
+			upPtr++
+			switchFlag = 1
+		}
+		if switchFlag == 1 && lowPtr < len(lowSlice) {
+			fmt.Print(string(lowSlice[lowPtr]))
+			lowPtr++
+			switchFlag = -1
+		}
 
-	s := &http.Server{
-		Addr:    ":80",
-		Handler: r,
+		if lowPtr >= len(lowSlice) {
+			fmt.Println(string(upSlice))
+			break
+		}
+		if upPtr >= len(upSlice) {
+			fmt.Println(string(lowSlice))
+			break
+		}
+
 	}
-
-	s.ListenAndServe()
 }
