@@ -1,5 +1,6 @@
 package daily
 
+// lc88
 // no ex-space
 func MergeTwoSortedArrays(nums1 []int, m int, nums2 []int, n int) {
 	for p1, p2, tail := m-1, n-1, m+n-1; p1 >= 0 || p2 >= 0; tail-- {

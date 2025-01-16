@@ -1,5 +1,6 @@
 package daily
 
+// lc27
 func RemoveElement(nums []int, val int) int {
 	if len(nums) == 0 {
 		return 0
